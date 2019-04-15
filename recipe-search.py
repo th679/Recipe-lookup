@@ -15,10 +15,11 @@ entry_value = tkinter.StringVar()
 search = tkinter.Entry(textvariable=entry_value)
 
 def search_button_click():
-    #insert code to run search
+    #code to run search
+    search_value = entry_value.get()
     app_key = os.environ.get("my_app_key")
     app_id = os.environ.get("my_app_id")
-    request_url = f"https://api.edamam.com/search?q=chicken&app_id={app_id}&app_key={app_key}"
+    request_url = f"https://api.edamam.com/search?q={search_value}&app_id={app_id}&app_key={app_key}"
     response = requests.get(request_url)
     parsed_response = json.loads(response.text)
     print(parsed_response)
