@@ -14,6 +14,8 @@ search_label = tkinter.Label(text="Enter recipe name or key words here:")
 entry_value = tkinter.StringVar()
 search = tkinter.Entry(textvariable=entry_value)
 
+
+
 def search_button_click():
     #code to run search
     search_value = entry_value.get()
@@ -26,24 +28,34 @@ def search_button_click():
     recipes = parsed_response["hits"]
     for recipe in recipes:
         recipe_list.append(recipe["recipe"]["label"])
-    recipe_select_label = tkinter.Label(text="Select a recipe you would like to add from the dropdown:")
-    recipe_select = tkinter.Listbox()
+    #Add recipes to ListBox
     i = 1
     for recipe in recipe_list:
         recipe_select.insert(i, recipe)
         i = i + 1
-    recipe_select_label.pack()
-    recipe_select.pack()
 
 search_button = tkinter.Button(text="Search", command=search_button_click)
 
+selected_recipes = []
 
+def add_recipe_click():
+    selected_recipes.append(recipe_select.get(recipe_select.curselection()))
+    print(selected_recipes)
+    
+add_button = tkinter.Button(text="Add Recipe", command=add_recipe_click)
+
+print(selected_recipes)
 
 search_label.pack()
 search.pack()
 
-search_button.pack()
+recipe_select_label = tkinter.Label(text="Select a recipe you would like to add from the dropdown:")
+recipe_select = tkinter.Listbox()
+recipe_select_label.pack()
+recipe_select.pack()
 
+search_button.pack()
+add_button.pack()
 
 
 window.mainloop()
