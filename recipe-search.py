@@ -39,18 +39,18 @@ ingredients = []
 
 def add_recipe_click():
     selection = recipe_select.get(recipe_select.curselection())
-    selected_recipes.append(selection)
     for recipe in recipes:
         if selection == recipe["recipe"]["label"]:
             ingredients.append(recipe["recipe"]["ingredientLines"])
-    
-add_button = tkinter.Button(text="Add Recipe", command=add_recipe_click)
-
-def show_recipes_click():
+    selected_recipes.append(selection)
+    selections.delete(0, 'end')
     i = 1
     for selection in selected_recipes:
         selections.insert(i, selection)
         i = i + 1
+
+
+add_button = tkinter.Button(text="Add Recipe", command=add_recipe_click)
 
 def show_ingredients_click():
     print(ingredients)
@@ -65,8 +65,6 @@ def clear_selection_click():
     selections.delete(selection2[0])
 
 
-
-show_recipes_button = tkinter.Button(text="Show Added Recipes", command=show_recipes_click)
 show_ingredients_button = tkinter.Button(text="Show Grocery List", command=show_ingredients_click)
 clear_selection_button = tkinter.Button(text="Remove Selected Item", command=clear_selection_click)
 
@@ -91,10 +89,9 @@ selections_label.pack()
 selections.pack()
 
 
-
-show_recipes_button.pack()
-show_ingredients_button.pack()
 clear_selection_button.pack()
+show_ingredients_button.pack()
+
 
 
 window.mainloop()
