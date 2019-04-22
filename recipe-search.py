@@ -15,7 +15,6 @@ entry_value = tkinter.StringVar()
 search = tkinter.Entry(textvariable=entry_value)
 
 
-
 def search_button_click():
     #code to run search
     search_value = entry_value.get()
@@ -36,15 +35,30 @@ def search_button_click():
 
 search_button = tkinter.Button(text="Search", command=search_button_click)
 
+
+
 selected_recipes = []
+ingredients = []
 
 def add_recipe_click():
+    search_value = entry_value.get()
+    app_key = os.environ.get("my_app_key")
+    app_id = os.environ.get("my_app_id")
+    request_url = f"https://api.edamam.com/search?q={search_value}&app_id={app_id}&app_key={app_key}"
+    response = requests.get(request_url)
+    parsed_response = json.loads(response.text)
+    recipes = parsed_response["hits"]
     selected_recipes.append(recipe_select.get(recipe_select.curselection()))
+    selection = recipe_select.get(recipe_select.curselection())
+    for recipe in recipes:
+        if selection == recipe["recipe"]["label"]:
+            ingredients.append(recipe["recipe"]["ingredientLines"])
+    print(ingredients)
     print(selected_recipes)
     
 add_button = tkinter.Button(text="Add Recipe", command=add_recipe_click)
 
-print(selected_recipes)
+
 
 search_label.pack()
 search.pack()
