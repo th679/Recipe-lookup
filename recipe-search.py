@@ -53,12 +53,24 @@ def add_recipe_click():
     for recipe in recipes:
         if selection == recipe["recipe"]["label"]:
             ingredients.append(recipe["recipe"]["ingredientLines"])
-    print(ingredients)
-    print(selected_recipes)
     
 add_button = tkinter.Button(text="Add Recipe", command=add_recipe_click)
 
+def show_recipes_click():
+    print(selected_recipes)
 
+def show_ingredients_click():
+    print(ingredients)
+
+def clear_lists_click():
+    selected_recipes.clear()
+    ingredients.clear()
+
+
+
+show_recipes_button = tkinter.Button(text="Show Added Recipes", command=show_recipes_click)
+show_ingredients_button = tkinter.Button(text="Show Grocery List", command=show_ingredients_click)
+clear_lists_button = tkinter.Button(text="Clear Lists", command=clear_lists_click)
 
 search_label.pack()
 search.pack()
@@ -70,6 +82,9 @@ recipe_select.pack()
 
 search_button.pack()
 add_button.pack()
+show_recipes_button.pack()
+show_ingredients_button.pack()
+clear_lists_button.pack()
 
 
 window.mainloop()
