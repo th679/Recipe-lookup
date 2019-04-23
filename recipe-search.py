@@ -53,7 +53,9 @@ def add_recipe_click():
 add_button = tkinter.Button(text="Add Recipe", command=add_recipe_click)
 
 def show_ingredients_click():
-    print(ingredients)
+    for ingredient in ingredients:
+        for x in range(len(ingredient)):
+            print(ingredient[x])
 
 def clear_selection_click():
     selection = selections.get(selections.curselection())
