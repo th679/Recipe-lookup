@@ -3,6 +3,7 @@ import requests
 import json
 import os
 import tkinter
+import datetime
 
 load_dotenv()
 
@@ -12,7 +13,7 @@ window = tkinter.Tk()
 
 
 def search_button_click():
-    #code to run search
+    #code to run search, adapted from Robo-Advisor Project
     global search_value, app_key, app_id, request_url, response, parsed_response, recipes
     search_value = entry_value.get()
     app_key = os.environ.get("my_app_key")
@@ -29,9 +30,12 @@ def search_button_click():
     for recipe in recipe_list:
         recipe_select.insert(i, recipe)
         i = i + 1
+    #Error trapping
+    if 'Error' in response.text:
+        print("Could not find recipe with that term. Please try again")
+        quit()
 
 search_button = tkinter.Button(text="Search", command=search_button_click)
-
 
 
 selected_recipes = []
@@ -43,6 +47,7 @@ def add_recipe_click():
         if selection == recipe["recipe"]["label"]:
             ingredients.append(recipe["recipe"]["ingredientLines"])
     selected_recipes.append(selection)
+    #add selections to ListBox
     selections.delete(0, 'end')
     i = 1
     for selection in selected_recipes:
@@ -52,17 +57,24 @@ def add_recipe_click():
 
 add_button = tkinter.Button(text="Add Recipe", command=add_recipe_click)
 
+t = datetime.datetime.now()
+
 def show_ingredients_click():
+    print("----------------------------")
+    print("GROCERY LIST FOR " + t.strftime("%Y-%m-%d"))
+    print("----------------------------")
     for ingredient in ingredients:
         for x in range(len(ingredient)):
             print(ingredient[x])
 
 def clear_selection_click():
     selection = selections.get(selections.curselection())
+    #clear lists
     selected_recipes.remove(selection)
     for recipe in recipes:
         if selection == recipe["recipe"]["label"]:
             ingredients.remove(recipe["recipe"]["ingredientLines"])
+    #clear ListBox
     selection2 = selections.curselection()
     selections.delete(selection2[0])
 
@@ -78,17 +90,27 @@ search_label.pack()
 search.pack()
 search_button.pack()
 
+
+Hscrollbar = tkinter.Scrollbar()
+Hscrollbar.pack(side=tkinter.BOTTOM, fill=tkinter.X)
 recipe_select_label = tkinter.Label(text="Select a recipe you would like to add from the dropdown:")
 recipe_select = tkinter.Listbox()
+Hscrollbar.config(command=recipe_select.xview)
+recipe_select.config(xscrollcommand=Hscrollbar.set)
 recipe_select_label.pack()
 recipe_select.pack()
 add_button.pack()
 
-
+Vscrollbar = tkinter.Scrollbar()
+Vscrollbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
 selections_label = tkinter.Label(text="Your Added Recipes:")
 selections = tkinter.Listbox()
+Vscrollbar.config(command=selections.yview)
+selections.config(yscrollcommand=Vscrollbar.set)
 selections_label.pack()
 selections.pack()
+
+#scrollbar code adapted from http://www.java2s.com/Code/Python/GUI-Tk/ListBoxwithscrollBar.htm
 
 
 clear_selection_button.pack()
