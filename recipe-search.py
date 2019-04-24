@@ -90,23 +90,25 @@ search_label.pack()
 search.pack()
 search_button.pack()
 
-
+Vscrollbar = tkinter.Scrollbar()
+Vscrollbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
 Hscrollbar = tkinter.Scrollbar()
 Hscrollbar.pack(side=tkinter.BOTTOM, fill=tkinter.X)
 recipe_select_label = tkinter.Label(text="Select a recipe you would like to add from the dropdown:")
 recipe_select = tkinter.Listbox()
+Vscrollbar.config(command=recipe_select.yview)
 Hscrollbar.config(command=recipe_select.xview)
-recipe_select.config(xscrollcommand=Hscrollbar.set)
+recipe_select.config(yscrollcommand=Vscrollbar.set, xscrollcommand=Hscrollbar.set)
 recipe_select_label.pack()
 recipe_select.pack()
 add_button.pack()
 
-Vscrollbar = tkinter.Scrollbar()
-Vscrollbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
+Vscrollbar2 = tkinter.Scrollbar()
+Vscrollbar2.pack(side=tkinter.RIGHT, fill=tkinter.Y)
 selections_label = tkinter.Label(text="Your Added Recipes:")
 selections = tkinter.Listbox()
-Vscrollbar.config(command=selections.yview)
-selections.config(yscrollcommand=Vscrollbar.set)
+Vscrollbar2.config(command=selections.yview)
+selections.config(yscrollcommand=Vscrollbar2.set)
 selections_label.pack()
 selections.pack()
 
@@ -117,7 +119,7 @@ clear_selection_button.pack()
 show_ingredients_button.pack()
 
 
-
 window.mainloop()
 
+#https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/99ce7522557f0a9c8690e48ac95bcce0d528b380/notes/python/packages/tkinter.md
 
