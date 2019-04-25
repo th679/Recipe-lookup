@@ -4,20 +4,27 @@ import json
 import os
 import tkinter
 import datetime
+from PIL import ImageTk, Image
 
 load_dotenv()
 
 #Initialize GUI
 
 window = tkinter.Tk()
+window.title("Grocery List Generator")
+
+path = "Edamam_attribution.png"
+img = ImageTk.PhotoImage(Image.open(path))
+panel = tkinter.Label(window, image = img)
+panel.pack(side="bottom")
 
 
 def search_button_click():
     #code to run search, adapted from Robo-Advisor Project
     global search_value, app_key, app_id, request_url, response, parsed_response, recipes
     search_value = entry_value.get()
-    app_key = os.environ.get("my_app_key")
-    app_id = os.environ.get("my_app_id")
+    app_key = os.environ.get("my_app_key", "Set an env variable named my_app_id")
+    app_id = os.environ.get("my_app_id", "Set an env variable named my_app_id")
     request_url = f"https://api.edamam.com/search?q={search_value}&app_id={app_id}&app_key={app_key}"
     response = requests.get(request_url)
     parsed_response = json.loads(response.text)
@@ -92,7 +99,7 @@ search_button.pack()
 
 recipe_select_label = tkinter.Label(text="Select a recipe you would like to add from the dropdown:")
 recipe_select = tkinter.Listbox()
-recipe_select.config(width=0)
+recipe_select.config(width=50)
 recipe_select_label.pack()
 recipe_select.pack()
 add_button.pack()
@@ -102,7 +109,7 @@ Vscrollbar2.pack(side=tkinter.RIGHT, fill=tkinter.Y)
 selections_label = tkinter.Label(text="Your Added Recipes:")
 selections = tkinter.Listbox()
 Vscrollbar2.config(command=selections.yview)
-selections.config(yscrollcommand=Vscrollbar2.set, width=0)
+selections.config(yscrollcommand=Vscrollbar2.set, width=50)
 selections_label.pack()
 selections.pack()
 
