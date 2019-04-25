@@ -17,6 +17,7 @@ path = "Edamam_attribution.png"
 img = ImageTk.PhotoImage(Image.open(path))
 panel = tkinter.Label(window, image = img)
 panel.pack(side="bottom")
+#https://stackoverflow.com/questions/23901168/how-do-i-insert-a-jpeg-image-into-a-python-tkinter-window
 
 
 def search_button_click():
