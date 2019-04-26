@@ -71,9 +71,15 @@ def show_ingredients_click():
     print("----------------------------")
     print("GROCERY LIST FOR " + t.strftime("%Y-%m-%d"))
     print("----------------------------")
+    f = open("grocery-list.txt", "w+")
+    f.write("GROCERY LIST FOR " + t.strftime("%Y-%m-%d") + ":\n")
     for ingredient in ingredients:
         for x in range(len(ingredient)):
             print(ingredient[x])
+            print(ingredient[x], file=f)
+            #f.write(ingredient[x] & "\n")
+    f.close()
+
 
 def clear_selection_click():
     selection = selections.get(selections.curselection())
