@@ -3,6 +3,7 @@ import requests
 import json
 import os
 import tkinter
+from tkinter import messagebox
 import datetime
 from PIL import ImageTk, Image
 
@@ -31,6 +32,9 @@ def search_button_click():
     parsed_response = json.loads(response.text)
     recipe_list = []
     recipes = parsed_response["hits"]
+    if recipes == []:
+        print("Please enter another search term")
+        messagebox.showinfo("Input Error", "Please enter a different search term")
     for recipe in recipes:
         recipe_list.append(recipe["recipe"]["label"])
     #Add recipes to ListBox

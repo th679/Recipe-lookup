@@ -14,7 +14,8 @@ app_key = os.environ.get("my_app_key", "Set an env variable named my_app_key")
 
 @pytest.mark.skipif(CI_ENV==True, reason=SKIP_REASON)
 def test_keys():
-    search = requests.get(f"https://api.edamam.com/search?q=chicken&app_id={app_id}&app_key={app_key}")
+    url = f"https://api.edamam.com/search?q=chicken&app_id={app_id}&app_key={app_key}"
+    search = requests.get(url)
     assert app_id != "Set an env variable named my_app_id"
     assert app_key != "Set an env variable named my_app_id"
     assert search.status_code == 200
