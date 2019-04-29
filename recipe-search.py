@@ -76,8 +76,7 @@ def show_ingredients_click():
     for ingredient in ingredients:
         for x in range(len(ingredient)):
             print(ingredient[x])
-            print(ingredient[x], file=f)
-            #f.write(ingredient[x] & "\n")
+            print(ingredient[x], file=f) #https://stackoverflow.com/questions/6159900/correct-way-to-write-line-to-file
     f.close()
 
 
