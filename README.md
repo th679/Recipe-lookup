@@ -1,5 +1,9 @@
 # Recipe-lookup
 
+## About
+
+This program allows you to lookup recipes using an Edamam API and generate a grocery list using the selected recipes.
+
 ## Prerequisites
 
 - Anaconda 3.7
@@ -32,3 +36,13 @@ Run the recommendation script:
 ```py
 python app/recipe-search.py
 ```
+
+##Testing
+
+To run automated tests run the following script:
+
+```py
+pytest
+```
+
+It is also recommended that you integrate your repository with a continuous integration (CI) platform to run the automated tests when the repository is updated. The recommended CI platform is the [Travis CI] (https://travis-ci.org/) platform.
