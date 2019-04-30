@@ -33,7 +33,6 @@ def search_button_click():
     recipe_list = []
     recipes = parsed_response["hits"]
     if recipes == []:
-        print("Please enter another search term")
         messagebox.showinfo("Input Error", "Please enter a different search term")
     for recipe in recipes:
         recipe_list.append(recipe["recipe"]["label"])
