@@ -4,7 +4,9 @@ import json
 import os
 import pytest
 
-CI_ENV = os.environ.get("CI", "OOPS") == "true"
+from app.recipe-search import get_response
+
+CI_ENV = os.environ.get("CI") == "true"
 SKIP_REASON = "to avoid issuing requests from the CI server"
 
 load_dotenv()
@@ -16,3 +18,10 @@ app_key = os.environ.get("my_app_key", "Set an env variable named my_app_key")
 def test_keys():
     assert app_id != "Set an env variable named my_app_id"
     assert app_key != "Set an env variable named my_app_id"
+
+
+def test_search():
+    search_value = "chicken"
+    parsed_response = get_response(search_value)
+    assert isinstance(parsed_response, dict)
+

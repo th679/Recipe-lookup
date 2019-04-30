@@ -20,6 +20,14 @@ panel = tkinter.Label(window, image = img)
 panel.pack(side="bottom")
 #https://stackoverflow.com/questions/23901168/how-do-i-insert-a-jpeg-image-into-a-python-tkinter-window
 
+#for testing
+def get_response(search_value):
+    app_key = os.environ.get("my_app_key", "Set an env variable named my_app_id")
+    app_id = os.environ.get("my_app_id", "Set an env variable named my_app_id")
+    url = f"https://api.edamam.com/search?q={search_value}&app_id={app_id}&app_key={app_key}"
+    response = requests.get(url)
+    return json.loads(response.text)
+
 
 def search_button_click():
     #code to run search, adapted from Robo-Advisor Project
