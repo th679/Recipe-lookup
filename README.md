@@ -37,7 +37,7 @@ Run the recommendation script:
 python app/recipe-search.py
 ```
 
-##Testing
+## Testing
 
 To run automated tests run the following script:
 
@@ -45,4 +45,4 @@ To run automated tests run the following script:
 pytest
 ```
 
-It is also recommended that you integrate your repository with a continuous integration (CI) platform to run the automated tests when the repository is updated. The recommended CI platform is the [Travis CI] (https://travis-ci.org/) platform.
+It is also recommended that you integrate your repository with a continuous integration (CI) platform to run the automated tests when the repository is updated. The recommended CI platform is the [Travis CI](https://travis-ci.org/) platform.
