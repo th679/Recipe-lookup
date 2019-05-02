@@ -14,7 +14,7 @@ load_dotenv()
 window = tkinter.Tk()
 window.title("Grocery List Generator")
 
-path = "Edamam_attribution.png"
+path = os.path.join(os.path.dirname(__file__), "Edamam_attribution.png")
 img = ImageTk.PhotoImage(Image.open(path))
 panel = tkinter.Label(window, image = img)
 panel.pack(side="bottom")
@@ -132,4 +132,3 @@ show_ingredients_button.pack()
 window.mainloop()
 
 #https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/99ce7522557f0a9c8690e48ac95bcce0d528b380/notes/python/packages/tkinter.md
-
